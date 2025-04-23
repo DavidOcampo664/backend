@@ -1,11 +1,30 @@
 {
   "info": {
-    "name": "Neko Sushi API - Colecci\u00f3n",
+    "name": "Neko Sushi API - Colecci\u00f3n Completa",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_postman_id": "neko-sushi-collection-id",
-    "description": "Colecci\u00f3n para probar la API de reservas de tatamis en Neko Sushi"
+    "description": "Colecci\u00f3n completa para probar la API de reservas de tatamis en Neko Sushi"
   },
   "item": [
+    {
+      "name": "Registro de Usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/usuarios/registro"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\": \"Cliente Ejemplo\", \"email\": \"cliente@neko.com\", \"password\": \"gato123\", \"rol\": \"cliente\"}"
+        }
+      }
+    },
     {
       "name": "Login - Admin",
       "request": {
@@ -45,6 +64,39 @@
       }
     },
     {
+      "name": "Ver perfil (cliente o admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token_cliente}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/usuarios/perfil"
+        }
+      }
+    },
+    {
+      "name": "Ver todos los Tatamis",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/tatamis"
+        }
+      }
+    },
+    {
+      "name": "Ver Tatamis Disponibles",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/tatamis/disponibles?fecha=2025-05-01&hora=18:00&personas=2"
+        }
+      }
+    },
+    {
       "name": "Crear Tatami (Admin)",
       "request": {
         "method": "POST",
@@ -64,6 +116,21 @@
         "body": {
           "mode": "raw",
           "raw": "{\"nombre\": \"Tatami Sakura\", \"capacidad\": 4}"
+        }
+      }
+    },
+    {
+      "name": "Eliminar Tatami (Admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token_admin}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/tatamis/1"
         }
       }
     },
