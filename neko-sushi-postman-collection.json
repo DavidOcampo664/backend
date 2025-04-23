@@ -1,0 +1,139 @@
+{
+  "info": {
+    "name": "Neko Sushi API - Colecci\u00f3n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "neko-sushi-collection-id",
+    "description": "Colecci\u00f3n para probar la API de reservas de tatamis en Neko Sushi"
+  },
+  "item": [
+    {
+      "name": "Login - Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/usuarios/login"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"admin@neko.com\", \"password\": \"sushi123\"}"
+        }
+      }
+    },
+    {
+      "name": "Login - Cliente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/usuarios/login"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"cliente@neko.com\", \"password\": \"gato123\"}"
+        }
+      }
+    },
+    {
+      "name": "Crear Tatami (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token_admin}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/tatamis"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\": \"Tatami Sakura\", \"capacidad\": 4}"
+        }
+      }
+    },
+    {
+      "name": "Crear Reserva (Cliente)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token_cliente}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/reservas"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"fecha\": \"2025-05-01\", \"hora\": \"18:00\", \"numero_personas\": 2, \"tatami_id\": 1}"
+        }
+      }
+    },
+    {
+      "name": "Mis Reservas (Cliente)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token_cliente}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/reservas/mis-reservas"
+        }
+      }
+    },
+    {
+      "name": "Confirmar Reserva (Admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token_admin}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/reservas/1/confirmar"
+        }
+      }
+    },
+    {
+      "name": "Ver Estad\u00edsticas (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token_admin}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/reservas/estadisticas"
+        }
+      }
+    }
+  ]
+}
