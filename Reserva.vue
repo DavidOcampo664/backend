@@ -123,33 +123,34 @@ const enviarReserva = async () => {
   }
 }
 </script>
-
 <style scoped>
 .reserva-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #ecc6ab;
+  background: url('https://wallpaperaccess.com/full/5388777.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
   padding: 40px 20px;
 }
 
 .reserva-container {
-  background: #d5aa7d;
+  background: #2c2c2c;
   padding: 30px;
   border-radius: 14px;
-  box-shadow: 0 0 20px #311e1f55;
+  box-shadow: 0 0 20px #00000066;
   max-width: 420px;
   width: 100%;
   text-align: center;
-  color: #311e1f;
+  color: #f5f5f5;
   font-family: 'Noto Serif JP', serif;
 }
 
 h2 {
   font-size: 26px;
   margin-bottom: 20px;
-  color: #9f3936;
+  color: #2b94c5; /* dorado */
   font-weight: bold;
 }
 
@@ -157,7 +158,7 @@ h2 {
   display: block;
   margin: 12px 0 6px;
   text-align: left;
-  color: #311e1f;
+  color: #f5f5f5;
   font-weight: 600;
 }
 
@@ -165,17 +166,17 @@ h2 {
   width: 100%;
   padding: 10px;
   border-radius: 10px;
-  border: 2px solid #8c6d52;
-  background-color: #ecc6ab;
-  color: #311e1f;
+  border: 2px solid #555;
+  background-color: #3a3a3a;
+  color: #f5f5f5;
   font-size: 16px;
   transition: 0.3s ease;
 }
 
 .formulario input:focus {
   outline: none;
-  border-color: #9f3936;
-  background-color: #f5d9c3;
+  border-color: #4f848f;
+  background-color: #4a4a4a;
 }
 
 .mesas-lista {
@@ -188,36 +189,37 @@ h2 {
 
 .mesas-lista button {
   padding: 10px 12px;
-  background-color: #f5d9c3;
-  border: 2px solid #8c6d52;
+  background-color: #444;
+  border: 2px solid #888;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
+  color: #f5f5f5;
   transition: 0.3s;
 }
 
 .mesas-lista button:hover:not(.ocupada):not(.seleccionada) {
-  background-color: #e6ba9e;
+  background-color: #666;
 }
 
 .mesas-lista button.seleccionada {
-  background-color: #9f3936;
-  color: #fff7f1;
-  border-color: #9f3936;
+  background-color: #24a4a9;
+  color: #1e1e1e;
+  border-color: #346c85;
 }
 
 .mesas-lista button.ocupada {
-  background-color: #ccc;
-  color: #666;
-  border-color: #999;
+  background-color: #777;
+  color: #aaa;
+  border-color: #555;
   cursor: not-allowed;
 }
 
 button.reserva-btn {
   font-size: 14px;
   padding: 10px 20px;
-  background-color: #9f3936;
-  color: #fff7f1;
+  background-color: #3f84a4;
+  color: #1e1e1e;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -226,15 +228,15 @@ button.reserva-btn {
 }
 
 button.reserva-btn:hover {
-  background-color: #8c6d52;
+  background-color: #366687;
   transform: scale(1.05);
-  box-shadow: 0 0 10px #311e1f33;
+  box-shadow: 0 0 10px #00000033;
 }
 
 .mensaje {
   margin-top: 18px;
   font-weight: bold;
-  color: #311e1f;
+  color: #266c7f;
   animation: fadein 0.6s ease-in;
 }
 
