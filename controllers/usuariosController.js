@@ -1,20 +1,18 @@
-const db = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const authModel = require('../models/authModel');
 
 // Registrar usuario
 exports.registrar = async (req, res) => {
   const { nombre, email, password, rol } = req.body;
+
   if (!nombre || !email || !password) {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
   }
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await db.query(
-      'INSERT INTO usuarios (nombre, email, password, rol) VALUES ($1, $2, $3, $4) RETURNING id, nombre, email, rol',
-      [nombre, email, hashedPassword, rol || 'cliente']
-    );
+    const result = await authModel.crearUsuario(nombre, email, hashedPassword, rol || 'cliente');
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error(err);
@@ -25,12 +23,13 @@ exports.registrar = async (req, res) => {
 // Login de usuario
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
     return res.status(400).json({ error: 'Email y contraseña son obligatorios' });
   }
 
   try {
-    const result = await db.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+    const result = await authModel.buscarUsuarioPorEmail(email);
     const usuario = result.rows[0];
 
     if (!usuario) {
@@ -56,10 +55,10 @@ exports.login = async (req, res) => {
   }
 };
 
-// Ver perfil (requiere autenticación)
+// Ver perfil
 exports.perfil = async (req, res) => {
   try {
-    const result = await db.query('SELECT id, nombre, email, rol FROM usuarios WHERE id = $1', [req.user.id]);
+    const result = await authModel.obtenerPerfilPorId(req.user.id);
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
@@ -67,13 +66,13 @@ exports.perfil = async (req, res) => {
   }
 };
 
-exports.verPerfil = async (req, res) => {
-    try {
-      const { id, nombre, email, rol } = req.user;
-      res.json({ id, nombre, email, rol });
-    } catch (error) {
-      console.error('Error al obtener perfil:', error);
-      res.status(500).json({ error: 'Error al obtener el perfil del usuario' });
-    }
-  };
-  
+// Alternativa para ver perfil si ya está en req.user
+exports.verPerfil = (req, res) => {
+  try {
+    const { id, nombre, email, rol } = req.user;
+    res.json({ id, nombre, email, rol });
+  } catch (err) {
+    console.error('Error al obtener perfil:', err);
+    res.status(500).json({ error: 'Error al obtener el perfil del usuario' });
+  }
+};

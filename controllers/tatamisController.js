@@ -1,8 +1,8 @@
-const db = require('../db');
+const tatamisModel = require('../models/tatamisModel');
 
 exports.getTatamis = async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM tatamis');
+    const result = await tatamisModel.obtenerTodos();
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -18,18 +18,7 @@ exports.getTatamisDisponibles = async (req, res) => {
   }
 
   try {
-    const result = await db.query(
-      `
-      SELECT * FROM tatamis
-      WHERE capacidad >= $1
-        AND id NOT IN (
-          SELECT tatami_id FROM reservas
-          WHERE fecha = $2 AND hora = $3 AND estado != 'cancelada'
-        )
-      `,
-      [personas, fecha, hora]
-    );
-
+    const result = await tatamisModel.obtenerDisponibles(fecha, hora, personas);
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -39,15 +28,13 @@ exports.getTatamisDisponibles = async (req, res) => {
 
 exports.createTatami = async (req, res) => {
   const { nombre, capacidad } = req.body;
+
   if (!nombre || !capacidad) {
     return res.status(400).json({ error: 'Faltan datos: nombre o capacidad' });
   }
 
   try {
-    const result = await db.query(
-      'INSERT INTO tatamis (nombre, capacidad) VALUES ($1, $2) RETURNING *',
-      [nombre, capacidad]
-    );
+    const result = await tatamisModel.crear(nombre, capacidad);
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error(err);
@@ -57,11 +44,13 @@ exports.createTatami = async (req, res) => {
 
 exports.eliminarTatami = async (req, res) => {
   const { id } = req.params;
+
   try {
-    const result = await db.query('DELETE FROM tatamis WHERE id = $1 RETURNING *', [id]);
+    const result = await tatamisModel.eliminar(id);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Tatami no encontrado' });
     }
+
     res.json({ mensaje: 'Tatami eliminado correctamente', tatami: result.rows[0] });
   } catch (err) {
     console.error(err);
