@@ -2,7 +2,7 @@
   "info": {
     "name": "Neko Sushi API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_postman_id": "nekosushi-20250515000649"
+    "_postman_id": "nekosushi-20250515001042"
   },
   "item": [
     {
@@ -75,6 +75,41 @@
             }
           ]
         },
+        {
+          "name": "Registro Admin",
+          "request": {
+        "method": "POST",
+        "header": [
+        {
+          "key": "Content-Type",
+          "value": "application/json",
+          "type": "text"
+        },
+        {
+          "key": "Authorization",
+         "value": "Bearer {{token}}",
+         "type": "text"
+        }
+    ],
+    "body": {
+      "mode": "raw",
+      "raw": "{\n  \"nombre\": \"Admin\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\"\n}"
+    },
+    "url": {
+      "raw": "{{base_url}}/usuarios/registro/admin",
+      "host": [
+        "{{base_url}}"
+      ],
+      "path": [
+        "usuarios",
+        "registro",
+        "admin"
+      ]
+    }
+  },
+  "event": []
+},
+
         {
           "name": "Ver Perfil",
           "request": {
@@ -173,12 +208,62 @@
             }
           },
           "event": []
+        },
+        {
+          "name": "Eliminar Tatami (admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "{{base_url}}/tatamis/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tatamis",
+                "1"
+              ]
+            }
+          },
+          "event": []
         }
       ]
     },
     {
       "name": "Reservas",
       "item": [
+        {
+          "name": "Listar Reservas (admin o cliente)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "{{base_url}}/reservas",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reservas"
+              ]
+            }
+          },
+          "event": []
+        },
+        
         {
           "name": "Crear Reserva",
           "request": {
