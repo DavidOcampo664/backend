@@ -24,9 +24,9 @@
               "raw": "{\n  \"nombre\": \"Juan\",\n  \"email\": \"juan@example.com\",\n  \"password\": \"123456\"\n}"
             },
             "url": {
-              "raw": "{{base_url}}/usuarios/registro",
+              "raw": "localhost:3000/usuarios/registro",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "usuarios",
@@ -52,9 +52,9 @@
               "raw": "{\n  \"email\": \"juan@example.com\",\n  \"password\": \"123456\"\n}"
             },
             "url": {
-              "raw": "{{base_url}}/usuarios/login",
+              "raw": "localhost:3000/usuarios/login",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "usuarios",
@@ -96,9 +96,9 @@
       "raw": "{\n  \"nombre\": \"Admin\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\"\n}"
     },
     "url": {
-      "raw": "{{base_url}}/usuarios/registro/admin",
+      "raw": "localhost:3000/usuarios/registro/admin",
       "host": [
-        "{{base_url}}"
+        "localhost:3000"
       ],
       "path": [
         "usuarios",
@@ -123,9 +123,9 @@
             ],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/usuarios/perfil",
+              "raw": "localhost:3000/usuarios/perfil",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "usuarios",
@@ -147,9 +147,9 @@
             "header": [],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/tatamis",
+              "raw": "localhost:3000/tatamis",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "tatamis"
@@ -179,9 +179,9 @@
               "raw": "{\n  \"nombre\": \"Tatami A\",\n  \"capacidad\": 6\n}"
             },
             "url": {
-              "raw": "{{base_url}}/tatamis",
+              "raw": "localhost:3000/tatamis",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "tatamis"
@@ -197,9 +197,9 @@
             "header": [],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/tatamis/disponibles?fecha=2025-05-14&hora=19:00&personas=4",
+              "raw": "localhost:3000/tatamis/disponibles?fecha=2025-05-14&hora=19:00&personas=4",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "tatamis",
@@ -222,9 +222,9 @@
             ],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/tatamis/1",
+              "raw": "localhost:3000/tatamis/1",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "tatamis",
@@ -252,9 +252,9 @@
             ],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/reservas",
+              "raw": "localhost:3000/reservas",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "reservas"
@@ -285,9 +285,9 @@
               "raw": "{\n  \"fecha\": \"2025-05-14\",\n  \"hora\": \"19:00\",\n  \"numero_personas\": 4,\n  \"tatami_id\": 1\n}"
             },
             "url": {
-              "raw": "{{base_url}}/reservas",
+              "raw": "localhost:3000/reservas",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "reservas"
@@ -309,9 +309,9 @@
             ],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/reservas/mis-reservas",
+              "raw": "localhost:3000/reservas/mis-reservas",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "reservas",
@@ -334,9 +334,9 @@
             ],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/reservas/1/confirmar",
+              "raw": "localhost:3000/reservas/1/confirmar",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "reservas",
@@ -360,9 +360,9 @@
             ],
             "body": {},
             "url": {
-              "raw": "{{base_url}}/reservas/estadisticas",
+              "raw": "localhost:3000/reservas/estadisticas",
               "host": [
-                "{{base_url}}"
+                "localhost:3000"
               ],
               "path": [
                 "reservas",
