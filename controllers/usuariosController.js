@@ -22,6 +22,9 @@ exports.registrar = async (req, res) => {
 
 // Login de usuario
 exports.login = async (req, res) => {
+  // 👇 Aquí ves qué datos están llegando desde el frontend
+  console.log("📩 Datos recibidos en login:", req.body);
+
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -55,7 +58,7 @@ exports.login = async (req, res) => {
   }
 };
 
-// Ver perfil
+// Ver perfil desde base de datos
 exports.perfil = async (req, res) => {
   try {
     const result = await authModel.obtenerPerfilPorId(req.user.id);
@@ -66,7 +69,7 @@ exports.perfil = async (req, res) => {
   }
 };
 
-// Alternativa para ver perfil si ya está en req.user
+// Ver perfil desde JWT si ya viene en el middleware
 exports.verPerfil = (req, res) => {
   try {
     const { id, nombre, email, rol } = req.user;
