@@ -2,9 +2,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authModel = require('../models/usuariosModels');
 
-// Registrar usuario
-exports.registrar = async (req, res) => {
-  const { nombre, email, password, rol } = req.body;
+// Registrar usuario normal (rol por defecto: cliente)
+exports.registrarUsuario = async (req, res) => {
+  const { nombre, email, password } = req.body;
 
   if (!nombre || !email || !password) {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
@@ -12,11 +12,29 @@ exports.registrar = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await authModel.crearUsuario(nombre, email, hashedPassword, rol || 'cliente');
+    const result = await authModel.crearUsuario(nombre, email, hashedPassword, 'cliente');
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Error al registrar usuario' });
+  }
+};
+
+// Registrar administrador (solo si lo hace un admin)
+exports.registrarAdmin = async (req, res) => {
+  const { nombre, email, password } = req.body;
+
+  if (!nombre || !email || !password) {
+    return res.status(400).json({ error: 'Faltan datos obligatorios' });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const result = await authModel.crearUsuario(nombre, email, hashedPassword, 'admin');
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al registrar administrador' });
   }
 };
 
@@ -46,7 +64,7 @@ exports.login = async (req, res) => {
 
     // Generar token
     const token = jwt.sign(
-      { id: usuario.id, rol: usuario.rol },
+      { id: usuario.id, nombre: usuario.nombre, email: usuario.email, rol: usuario.rol },
       process.env.JWT_SECRET || 'secreto_neko',
       { expiresIn: '2h' }
     );

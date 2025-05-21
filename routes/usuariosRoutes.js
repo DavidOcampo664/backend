@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usuariosController = require('../controllers/usuariosController');
+const { verificarToken, permitirRol } = require('../middlewares/authMiddleware');
 
 /**
  * @swagger
@@ -13,7 +14,7 @@ const usuariosController = require('../controllers/usuariosController');
  * @swagger
  * /usuarios/registro:
  *   post:
- *     summary: Registrar un nuevo usuario
+ *     summary: Registrar un nuevo usuario (cliente)
  *     tags: [Usuarios]
  *     requestBody:
  *       required: true
@@ -28,14 +29,45 @@ const usuariosController = require('../controllers/usuariosController');
  *                 type: string
  *               password:
  *                 type: string
- *               rol:
- *                 type: string
- *                 enum: [cliente, admin]
  *     responses:
  *       201:
  *         description: Usuario registrado
  */
-router.post('/registro', usuariosController.registrar);
+router.post('/registro', usuariosController.registrarUsuario);
+
+/**
+ * @swagger
+ * /usuarios/registro/admin:
+ *   post:
+ *     summary: Registrar un nuevo administrador (solo accesible por admins)
+ *     tags: [Usuarios]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Administrador registrado
+ *       403:
+ *         description: Acceso denegado
+ */
+router.post(
+  '/registro/admin',
+  verificarToken,
+  permitirRol('admin'),
+  usuariosController.registrarAdmin
+);
 
 /**
  * @swagger
@@ -59,8 +91,6 @@ router.post('/registro', usuariosController.registrar);
  *         description: Login correcto con token
  */
 router.post('/login', usuariosController.login);
-
-const { verificarToken } = require('../middlewares/authMiddleware');
 
 /**
  * @swagger

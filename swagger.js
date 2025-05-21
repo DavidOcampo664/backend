@@ -24,10 +24,9 @@ const swaggerDefinition = {
     description: 'Documentación completa de la API REST para el sistema de reservas de tatamis en Neko Sushi.',
   },
   servers: [
-    {
-      url: 'http://10.10.8.237:3000',
-    },
-  ],
+    { url: 'http://localhost:3000', description: 'Servidor local' },
+    { url: 'http://10.10.8.237:3000', description: 'Servidor en red interna' },
+  ],  
 };
 
 const options = {

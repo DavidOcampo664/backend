@@ -6,6 +6,19 @@ const { verificarToken, permitirRol } = require('../middlewares/authMiddleware')
 
 /**
  * @swagger
+ * /reservas:
+ *   get:
+ *     summary: Obtener todas las reservas (admin o cliente)
+ *     tags: [Reservas]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de reservas
+ */
+
+/**
+ * @swagger
  * tags:
  *   name: Reservas
  *   description: Endpoints para gestionar reservas
